@@ -1,6 +1,8 @@
 QT       += core gui
 LIBS += -Ldll -lws2_32
 
+
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET =modbusopc
@@ -25,7 +27,8 @@ SOURCES += \
     ../../libmodbus/src/modbus-tcp.c \
     ../../libmodbus/src/modbus.c \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    open62541.c
 
 HEADERS += \
     ../../libmodbus/src/modbus-private.h \
@@ -48,14 +51,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    ../../open62541/WS2_32/WS2_32.Lib \
-    ../build-createopc-Desktop_Qt_5_14_1_MinGW_64_bit-Debug/createopc.dll
+    ../../open62541/WS2_32/WS2_32.Lib
 
 
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../build-createopc-Desktop_Qt_5_14_1_MinGW_64_bit-Debug/ -lcreateopc
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../build-createopc-Desktop_Qt_5_14_1_MinGW_64_bit-Debug/ -lcreateopcd
-else:unix:!macx: LIBS += -L$$PWD/../build-createopc-Desktop_Qt_5_14_1_MinGW_64_bit-Debug/ -lcreateopc
-
-INCLUDEPATH += $$PWD/../build-createopc-Desktop_Qt_5_14_1_MinGW_64_bit-Debug
-DEPENDPATH += $$PWD/../build-createopc-Desktop_Qt_5_14_1_MinGW_64_bit-Debug
